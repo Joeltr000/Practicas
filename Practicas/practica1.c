@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 	//Funcion con paso por valor
@@ -44,10 +45,22 @@ int main(){
         printf("El evento '%c' se guarda en la columna; %d\n", eventos[i], col);
     }
     printf("\n__Matriz__\n");
-    printf("Equipo | Correctos | Contraseña Incorrecta | Usuario inexistente | Bloqueados\n");
+    printf("Equipo | Correctos | Contraseña Incorrecta | Usuario inexistente | Bloqueados | Total Fallos | Estado\n");
     for (int i=0; i<2; i++){
-        printf("PC-0%d  | %-9d | %-10d            | %-10d\n", i + 1, matriz[i][1], matriz[i][2], matriz[i][3]);
+        int correctos = matriz[i][0];
+	int incorrectos = matriz[i][1];
+	int inexistentes = matriz[i][2];
+	int bloqueados = matriz[i][3];
+	int total_fallos = incorrectos + inexistentes;
+	char *estado;
+	if (total_fallos > 3){
+	    estado = "Sospechoso";
+	} else {
+	    estado = "Normal";
+	}
+        printf("PC-0%d  | %-9d | %-10d            | %-10d          | %10d | %12d | %s\n",i + 1,correctos,incorrectos,inexistentes, bloqueados, total_fallos, estado);
     }
 
     return 0;
 }
+
